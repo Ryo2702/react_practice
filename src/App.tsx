@@ -1,13 +1,9 @@
-import { useMemo } from "react";
-import { Context } from "./hook/UseContext";
-import { UseContext } from "./hook/UseContext";
+import { Form } from "./hook/UseCallback"
 
 export default function App() {
-  const object = useMemo(() => ({ kind: "complex" }), []);
-
   return (
-    <Context value={object}>
-      <UseContext/>
-    </Context>
+   <>
+   <Form />
+   </>
   )
 }
