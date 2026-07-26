@@ -1,17 +1,22 @@
 import { createContext, useContext } from "react";
 
-type Theme = "light" | "dark" | "system";
+type ComplexObject = {
+    kind: string;
+}
+// The context is created with `| null` in the type, to accurately reflect the default value.
+export const Context = createContext<ComplexObject | null>(null);
 
-const ThemeContext = createContext<Theme>("system");
+const useGetComplexObject = () => {
+    const object = useContext(Context);
+    if (!object) { throw new Error("useGetComplexObject must be used within Provider") }
+    return object;
+}
 
-const useGetTheme = () => useContext(ThemeContext);
-
-export function UseContext(){
-
-    const theme = useGetTheme();
+export function UseContext() {
+    const object = useGetComplexObject();
     return (
-        <div>
-            <p>Current theme: {theme} </p>
-        </div>
+        <>
+            <p>Current Object: { object.kind }</p>
+        </>
     );
 }
